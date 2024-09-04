@@ -69,9 +69,7 @@ void AimBot() {
                 playertargetpos = playerpos;
 
 
-                AimTarget.Print();
 
-                playertargetpos.Print();
             }
         }
 

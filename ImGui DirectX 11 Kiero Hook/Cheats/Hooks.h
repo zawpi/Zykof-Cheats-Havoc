@@ -5,20 +5,29 @@
 
 
 
-void(__fastcall* function_o)(void* self, Vector3 forward, Vector3 position, Quaternion rotation, std::byte utilIndex);
-void __stdcall function_hook(void* self, Vector3 forward, Vector3 position, Quaternion rotation, std::byte utilIndex) {
+void(__fastcall* Throw_o)(void* self, Vector3 forward, Vector3 position, Quaternion rotation, std::byte utilIndex);
+void __stdcall Throw_hook(void* self, Vector3 forward, Vector3 position, Quaternion rotation, std::byte utilIndex) {
 	std::cout << (int)utilIndex << std::endl;
-	position.Print();
 
 
-		function_o(self, Vector3(forward.x , forward.y, forward.z ), position, rotation, utilIndex);
+	for (int i = 0; i < Menu::NadeMultiply; i++)
+	{
+		Throw_o(self, Vector3(forward.x * Menu::NadeVeloMultiply, forward.y * Menu::NadeVeloMultiply, forward.z * Menu::NadeVeloMultiply), position, rotation, utilIndex);
 
-	
-	
+		if (Menu::Nuke)
+		{
 
+		
+			for (void* playerVoid : Variable::Players) {
 
-
-
+				std::cout << "throw";
+				uintptr_t player = (uintptr_t)playerVoid;
+				void* movementManag = *reinterpret_cast<void**>((uintptr_t)(player)+Offsets::playermovement_offset);
+				Vector3 Position = *reinterpret_cast<Vector3*>((uintptr_t)(movementManag)+Offsets::movementOffset);
+				Throw_o(self, Vector3(0, 0,0), Position, rotation, utilIndex);
+			}
+		}
+	}
 
 
 

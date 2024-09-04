@@ -20,23 +20,25 @@ uintptr_t GameAssembly = (uintptr_t)GetModuleHandle("GameAssembly.dll");
 
 
 void HookFunction() {
-	if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart), &PlayerStart_hook, (LPVOID*)&PlayerStart_o) != MH_OK) {
-		std::cout << "failed hook a function";
-	}
-	MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart));
-
-	if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy), &PlayerDestroy_hook, (LPVOID*)&PlayerDestroy_o) != MH_OK) {
-		std::cout << "failed hook a function";
-	}
-	MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy));
-
-
-
-    /// function hook test
-    if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::functionTest), &function_hook, (LPVOID*)&function_o) != MH_OK) {
+    if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart), &PlayerStart_hook, (LPVOID*)&PlayerStart_o) != MH_OK) {
         std::cout << "failed hook a function";
     }
-    MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::functionTest));
+    MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart));
+
+    if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy), &PlayerDestroy_hook, (LPVOID*)&PlayerDestroy_o) != MH_OK) {
+        std::cout << "failed hook a function";
+    }
+    MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy));
+
+
+
+
+    if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::ThrowFunction), &Throw_hook, (LPVOID*)&Throw_o) != MH_OK) {
+        std::cout << "failed hook a function";
+    }
+    MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::ThrowFunction));
+
+
 
 }
 
@@ -45,11 +47,11 @@ void HookFunction() {
 
 void CheatMain() {
 
-	if (GetAsyncKeyState(VK_DELETE) & 1) {
-		Menu::showMenu = !Menu::showMenu;
-		Sleep(50);
-	}
-    
+    if (GetAsyncKeyState(VK_DELETE) & 1) {
+        Menu::showMenu = !Menu::showMenu;
+        Sleep(50);
+    }
+
 
     if (Variable::LocalPlayer == NULL)
     {
@@ -65,7 +67,7 @@ void CheatMain() {
 
     Fov();
 
-	
+
 
 
 }
@@ -73,7 +75,7 @@ void CheatMain() {
 
 bool GradientButton(const char* label, const ImVec2& size, const ImVec4& color1, const ImVec4& color2)
 {
-    ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 5.0f);  
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 5.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
 
 
@@ -120,25 +122,25 @@ void ImguiWindow() {
     if (Menu::showMenu) {
 
         if (!initialized) {
-            ImGui::SetNextWindowSize(ImVec2(800, 500)); 
-            initialized = true; 
+            ImGui::SetNextWindowSize(ImVec2(800, 500));
+            initialized = true;
             Menu::actualMenu = "General";
         }
-        
+
         ImGui::Begin("Zykof Cheats", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
-        
+
         ImGuiStyle& style = ImGui::GetStyle();
         ImVec2 buttonSize(200, 50);
         ImVec2 LittlebuttonSize(100, 40);
 
-        
+
         float buttonSpacing = 5.0f;
-        float menuWidth = 200.0f;   
-        float spacing = 40.0f;     
+        float menuWidth = 200.0f;
+        float spacing = 40.0f;
 
 
-        ImGui::BeginChild("Menu", ImVec2(menuWidth, 0), true); 
+        ImGui::BeginChild("Menu", ImVec2(menuWidth, 0), true);
 
         if (GradientButton("General", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "General";
@@ -150,35 +152,41 @@ void ImguiWindow() {
             Menu::actualMenu = "AimBot";
         }
 
-        ImGui::Dummy(ImVec2(0, buttonSpacing)); 
+        ImGui::Dummy(ImVec2(0, buttonSpacing));
 
         if (GradientButton("ESP", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "ESP";
         }
 
-        ImGui::EndChild(); 
+        ImGui::EndChild();
 
-        
+
         ImGui::SameLine();
-        ImGui::BeginChild("MainContent", ImVec2(0, 0), true); 
+        ImGui::BeginChild("MainContent", ImVec2(0, 0), true);
 
         if (Menu::actualMenu == "General")
         {
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + menuWidth + 10);
             ImGui::Text("General");
+            ImGui::Text("FOV Hack");
             ImGui::Dummy(ImVec2(0, buttonSpacing));
             ImGui::SliderInt("FOV Cam", &Variable::FOVCam, 80, 180);
             ImGui::SliderInt("FOV Gun", &Variable::FOVGun, 60, 180);
+            ImGui::Dummy(buttonSize);
+            ImGui::Text("Nade Hack");
+            ImGui::SliderInt("Nade multiply", &Menu::NadeMultiply, 0, 200);
+            ImGui::SliderInt("Nade Velocity multiply", &Menu::NadeVeloMultiply, 0, 50);
+            ImGui::Checkbox("Throw Nade At Every Player", &Menu::Nuke);
         }
         else if (Menu::actualMenu == "AimBot")
         {
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + menuWidth + 10);
-            ImGui::Text("AimBot");            
+            ImGui::Text("AimBot");
             ImGui::Dummy(ImVec2(0, buttonSpacing));
             ImGui::Checkbox("AimBot When Aiming", &Menu::AimBotEnable);
             ImGui::Checkbox("Draw AimBot FOV", &Menu::AimBotDraw);
             ImGui::ColorEdit3("Color", Menu::AimBotColor);
-            
+            ImGui::Dummy(buttonSize);
 
             ImGui::SliderFloat("Fov AimBot", &Menu::FovAimBot, 10, 1000);
             ImGui::SliderFloat("Smoothing", &Menu::AimBotSmooth, 0, 10);
@@ -191,13 +199,13 @@ void ImguiWindow() {
             ImGui::ColorEdit3("Color", Menu::ESPColor);
         }
 
-        ImGui::EndChild(); 
+        ImGui::EndChild();
 
-        ImGui::End(); 
+        ImGui::End();
 
-       
-        style.FramePadding = ImVec2(4, 4); 
-        style.ItemSpacing = ImVec2(8, 4);   
+
+        style.FramePadding = ImVec2(4, 4);
+        style.ItemSpacing = ImVec2(8, 4);
     }
 }
 

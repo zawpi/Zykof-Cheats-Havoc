@@ -23,7 +23,7 @@ namespace Offsets {
     constexpr uintptr_t BodyRenderOffSet = 0x90;
     constexpr uintptr_t GetShaderOffset = 0x2136280;
     constexpr uintptr_t CameraOffset = 0x2f0;
-    constexpr uintptr_t functionTest = 0x5c42c0;
+    constexpr uintptr_t ThrowFunction = 0x5c42c0;
 
 }
 

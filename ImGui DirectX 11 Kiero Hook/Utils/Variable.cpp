@@ -1,4 +1,3 @@
-// Variable.cpp
 #include "Struct.h"
 #include <windows.h> 
 #include "../cheat.h"
@@ -27,4 +26,7 @@ namespace Menu {
     int Gamewidth = 0;
     int Gameheight = 0;
     bool ESPenabled = false;
+    int NadeMultiply = 1;
+    int NadeVeloMultiply = 1;
+    bool Nuke = false;
 }

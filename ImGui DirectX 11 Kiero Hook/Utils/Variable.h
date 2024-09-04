@@ -25,5 +25,8 @@ namespace Menu {
     extern RECT Gamerect;
     extern int Gamewidth, Gameheight;
     extern bool ESPenabled;
+    extern int NadeMultiply;
+    extern int NadeVeloMultiply;
+    extern bool Nuke;
 }
 
