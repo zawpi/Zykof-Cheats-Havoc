@@ -20,11 +20,16 @@
 # 🖼️ Screenshots
 ### Below are some screenshots demonstrating the cheat's functionality
 
-FOV Cam/Gun Changer: ![image](https://github.com/user-attachments/assets/d8556e0e-3e71-4414-9dab-a89e4078b1ba)
+FOV Cam/Gun Changer: ![image](https://github.com/user-attachments/assets/094683a4-4137-461a-be9f-87c966a6057e)
 
 
 
-AimBot FOV/Smoother: ![image](https://github.com/user-attachments/assets/c03a0b24-6444-41d7-a81f-64f6f9bb909d)
+
+AimBot FOV/Smoother: ![image](https://github.com/user-attachments/assets/5cfeaee7-9865-4f25-9c6e-ccba87da6099)
+
+
+ESP : ![image](https://github.com/user-attachments/assets/aecb7124-b2fc-49e7-9f88-c7b90913f1f6)
+
 
 
 
