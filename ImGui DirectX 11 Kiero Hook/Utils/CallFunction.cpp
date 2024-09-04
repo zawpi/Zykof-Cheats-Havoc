@@ -44,3 +44,5 @@ void* GetMainCam(void* self) {
     void* screenPosition = GetMainCam_Injected(self);
     return screenPosition;
 }
+
+

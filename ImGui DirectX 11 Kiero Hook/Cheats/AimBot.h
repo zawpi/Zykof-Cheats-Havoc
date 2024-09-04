@@ -18,9 +18,10 @@ void AimBot() {
         float distance3d = 0;
         int array_length = 0;
         uintptr_t array_address = NULL;
-
+        void* transform_address;
 
         for (void* playerVoid : Variable::Players) {
+
             uintptr_t player = (uintptr_t)playerVoid;
             void* playerlimbsystem = *reinterpret_cast<void**>(player + Offsets::LimbSystemOffset);
 
@@ -41,7 +42,7 @@ void AimBot() {
                 continue;
             }
 
-            void* transform_address = *reinterpret_cast<void**>(array_address + 0x20 + (8 * sizeof(uintptr_t)));
+            transform_address = *reinterpret_cast<void**>(array_address + 0x20 + (8 * sizeof(uintptr_t)));
             if (!transform_address) {
 
                 continue;
@@ -79,7 +80,7 @@ void AimBot() {
 
 
         void* aimbot_weaponmanager = *reinterpret_cast<void**>((uintptr_t)Variable::LocalPlayer + Offsets::aimbot_weaponmanager_offset);
-        if ((AimTarget.x != 0.0f && AimTarget.y != 0.0f) && (1 == *(int*)((uintptr_t)aimbot_weaponmanager + 0x150))) {
+        if ((AimTarget.x != 0.0f && AimTarget.y != 0.0f) && (1 != *(int*)((uintptr_t)Variable::LocalPlayer + 0x428)) && (1 == *(int*)((uintptr_t)aimbot_weaponmanager + 0x150))) {
             Vector2 currentMousePos = GetMousePosition();
             Vector2 aimPos(AimTarget.x, AimTarget.y);
             Vector2 offset = { aimPos.x - currentMousePos.x, aimPos.y - currentMousePos.y };

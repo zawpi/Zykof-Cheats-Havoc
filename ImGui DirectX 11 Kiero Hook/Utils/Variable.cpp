@@ -16,6 +16,9 @@ namespace Variable {
 
 namespace Menu {
     bool AimBotEnable = false;
+    bool AimBotDraw = false;
+    float AimBotColor[3] = { 1.0f, 0.0f, 0.0f };
+    float ESPColor[3] = { 1.0f, 0.0f, 0.0f };
     bool showMenu = false;
     std::string actualMenu = "";
     float AimBotSmooth = 5.0f;

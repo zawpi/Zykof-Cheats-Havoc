@@ -37,7 +37,7 @@ void DrawESP() {
             float minY = std::min_element(std::begin(corners), std::end(corners), [](const Vector3& a, const Vector3& b) { return a.y < b.y; })->y;
             float maxY = std::max_element(std::begin(corners), std::end(corners), [](const Vector3& a, const Vector3& b) { return a.y < b.y; })->y;
 
-            ImGui::GetForegroundDrawList()->AddRect(ImVec2(minX, minY), ImVec2(maxX, maxY), ImColor(255, 0, 255, 255));
+            ImGui::GetForegroundDrawList()->AddRect(ImVec2(minX, minY), ImVec2(maxX, maxY), ImColor(Menu::ESPColor[0], Menu::ESPColor[1], Menu::ESPColor[2], 1.0f));
         }
 
 

@@ -104,9 +104,9 @@ bool GradientButton(const char* label, const ImVec2& size, const ImVec4& color1,
 static bool initialized = false;
 
 void ImguiWindow() {
-    if (Menu::AimBotEnable)
+    if (Menu::AimBotEnable && Menu::AimBotDraw)
     {
-        ImGui::GetForegroundDrawList()->AddCircle(ImVec2(Menu::Gamewidth / 2, Menu::Gameheight / 2), Menu::FovAimBot, ImColor(255, 255, 255, 255),100);
+        ImGui::GetForegroundDrawList()->AddCircle(ImVec2(Menu::Gamewidth / 2, Menu::Gameheight / 2), Menu::FovAimBot, ImColor(Menu::AimBotColor[0], Menu::AimBotColor[1], Menu::AimBotColor[2], 1.0f), 100);
 
     }
 
@@ -120,47 +120,47 @@ void ImguiWindow() {
     if (Menu::showMenu) {
 
         if (!initialized) {
-            ImGui::SetNextWindowSize(ImVec2(800, 500)); // Taille initiale de la fenêtre
-            initialized = true; // Marque comme initialisé pour ne plus redéfinir la taille
+            ImGui::SetNextWindowSize(ImVec2(800, 500)); 
+            initialized = true; 
             Menu::actualMenu = "General";
         }
-        // Définir la fenêtre principale
+        
         ImGui::Begin("Zykof Cheats", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
-        // Modifier le style des boutons pour ajuster les espacements
+        
         ImGuiStyle& style = ImGui::GetStyle();
         ImVec2 buttonSize(200, 50);
         ImVec2 LittlebuttonSize(100, 40);
 
-        // Définir l'espacement entre les boutons
-        float buttonSpacing = 5.0f; // Ajustez cette valeur pour ajouter plus ou moins d'espace
-        float menuWidth = 200.0f;   // Largeur fixe du menu
-        float spacing = 40.0f;      // Espacement entre le menu et le contenu principal
+        
+        float buttonSpacing = 5.0f;
+        float menuWidth = 200.0f;   
+        float spacing = 40.0f;     
 
-        // Menu à gauche
-        ImGui::BeginChild("Menu", ImVec2(menuWidth, 0), true); // Largeur fixe, hauteur automatique
+
+        ImGui::BeginChild("Menu", ImVec2(menuWidth, 0), true); 
 
         if (GradientButton("General", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "General";
         }
 
-        ImGui::Dummy(ImVec2(0, buttonSpacing)); // Ajoute un espace vertical entre les boutons
+        ImGui::Dummy(ImVec2(0, buttonSpacing));
 
         if (GradientButton("AimBot", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "AimBot";
         }
 
-        ImGui::Dummy(ImVec2(0, buttonSpacing)); // Ajoute un espace vertical entre les boutons
+        ImGui::Dummy(ImVec2(0, buttonSpacing)); 
 
         if (GradientButton("ESP", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "ESP";
         }
 
-        ImGui::EndChild(); // Fin du groupe pour le menu à gauche
+        ImGui::EndChild(); 
 
-        // Aligner le contenu principal à côté du menu
+        
         ImGui::SameLine();
-        ImGui::BeginChild("MainContent", ImVec2(0, 0), true); // Largeur et hauteur automatiques
+        ImGui::BeginChild("MainContent", ImVec2(0, 0), true); 
 
         if (Menu::actualMenu == "General")
         {
@@ -175,7 +175,10 @@ void ImguiWindow() {
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + menuWidth + 10);
             ImGui::Text("AimBot");            
             ImGui::Dummy(ImVec2(0, buttonSpacing));
-            ImGui::Checkbox("AimBot", &Menu::AimBotEnable);
+            ImGui::Checkbox("AimBot When Aiming", &Menu::AimBotEnable);
+            ImGui::Checkbox("Draw AimBot FOV", &Menu::AimBotDraw);
+            ImGui::ColorEdit3("Color", Menu::AimBotColor);
+            
 
             ImGui::SliderFloat("Fov AimBot", &Menu::FovAimBot, 10, 1000);
             ImGui::SliderFloat("Smoothing", &Menu::AimBotSmooth, 0, 10);
@@ -185,15 +188,16 @@ void ImguiWindow() {
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + menuWidth + 10);
             ImGui::Text("ESP");
             ImGui::Checkbox("ESP", &Menu::ESPenabled);
+            ImGui::ColorEdit3("Color", Menu::ESPColor);
         }
 
-        ImGui::EndChild(); // Fin du groupe pour le contenu principal
+        ImGui::EndChild(); 
 
-        ImGui::End(); // Fin de la fenêtre principale
+        ImGui::End(); 
 
-        // Réinitialiser le style après usage pour éviter les effets indésirables ailleurs
-        style.FramePadding = ImVec2(4, 4);  // Réinitialiser le padding
-        style.ItemSpacing = ImVec2(8, 4);   // Réinitialiser l'espacement
+       
+        style.FramePadding = ImVec2(4, 4); 
+        style.ItemSpacing = ImVec2(8, 4);   
     }
 }
 

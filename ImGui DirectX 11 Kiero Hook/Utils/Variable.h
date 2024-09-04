@@ -18,6 +18,9 @@ namespace Menu {
     extern bool AimBotEnable;
     extern float AimBotSmooth;
     extern float FovAimBot;
+    extern bool AimBotDraw;
+    extern float AimBotColor[3];
+    extern float ESPColor[3];
     extern std::string actualMenu;
     extern RECT Gamerect;
     extern int Gamewidth, Gameheight;

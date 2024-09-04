@@ -13,3 +13,5 @@ typedef void* (__cdecl* GetMainCamFn)(void*);
 void* GetMainCam(void* self);
 
 Vector3 GetBonePos(void* self);
+
+
