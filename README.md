@@ -36,15 +36,15 @@ ESP : ![image](https://github.com/user-attachments/assets/e106d468-746b-4965-bd0
 
 # 🚀 SOON
 
-- [ ] **Check Visibility for AimBot** (Using the `get_isvisible` function from the `renderer` class) and only aim at enemy
+- [ ] **Check Visibility for AimBot and only aim at enemy**
 - [ ] **Add Bone Target for AimBot**
 - [ ] **Add ViewAngle AimBot**
-- [ ] **Fix ESP** (Using the `get_bounds` function from the `renderer` class)
+- [ ] **Fix ESP bound**
 - [ ] **Skeleton ESP**
 - [ ] **Silent Aim**
-- [ ] **Teleport Kill (TPKill)**
+- [ ] **Teleport Kill**
 - [ ] **Fly Mode**
-- [ ] **Unlock All**
+- [ ] **Unlock All Skin**
 
 
 # 📫 Contact Me if you have any questions or suggestions, feel free to open an issue or contact me via discord : [![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/GmeFEeSc) 
