@@ -10,7 +10,9 @@
 
 - [x] **AimBot FOV/Smoother** : A customizable AimBot that allows you to set the FOV and smoothness 
 
-- [x] **ESP Bound** : An BOX ESP 
+- [x] **ESP Bound** : An BOX ESP
+      
+- [x] **Nade Hack** : Throw multiple nade at same time / Increase the throw velocity / Nuke all player
 
 - [ ] **More Features Coming Soon** : Stay tuned for additional features that will be added in future updates.
 
@@ -20,15 +22,14 @@
 # 🖼️ Screenshots
 ### Below are some screenshots demonstrating the cheat's functionality
 
-FOV Cam/Gun Changer: ![image](https://github.com/user-attachments/assets/094683a4-4137-461a-be9f-87c966a6057e)
+General : ![image](https://github.com/user-attachments/assets/e3aca285-f1d2-45b9-8f41-84e5bdfd5744)
 
 
+AimBot : ![image](https://github.com/user-attachments/assets/b5e99d05-5013-49a3-9269-4164580323ee)
 
 
-AimBot FOV/Smoother: ![image](https://github.com/user-attachments/assets/5cfeaee7-9865-4f25-9c6e-ccba87da6099)
+ESP : ![image](https://github.com/user-attachments/assets/e106d468-746b-4965-bd05-b9b50ba96455)
 
-
-ESP : ![image](https://github.com/user-attachments/assets/aecb7124-b2fc-49e7-9f88-c7b90913f1f6)
 
 
 
