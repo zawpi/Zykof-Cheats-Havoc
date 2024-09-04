@@ -40,7 +40,6 @@ ESP : ![image](https://github.com/user-attachments/assets/aecb7124-b2fc-49e7-9f8
 - [ ] **Add ViewAngle AimBot**
 - [ ] **Fix ESP** (Using the `get_bounds` function from the `renderer` class)
 - [ ] **Skeleton ESP**
-- [ ] **Custom Color for AimBot and ESP**
 - [ ] **Grenade Hack**
 - [ ] **Silent Aim**
 - [ ] **Teleport Kill (TPKill)**
