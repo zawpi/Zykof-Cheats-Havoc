@@ -40,6 +40,8 @@ ESP : ![image](https://github.com/user-attachments/assets/e106d468-746b-4965-bd0
 # 🚀 SOON
 
 - [ ] **Check Visibility for AimBot and only aim at enemy**
+- [ ] **Anti Kick**
+- [ ] ** Change Fire Mode**
 - [ ] **Add Bone Target for AimBot**
 - [ ] **Add ViewAngle AimBot**
 - [ ] **Fix ESP bound**
