@@ -14,6 +14,8 @@
       
 - [x] **Nade Hack** : Throw multiple nade at same time / Increase the throw velocity / Nuke all player
 
+- [x] **Gun Hack** : No Recoil / No Inaccuracy / FireRate Hack / infinite ammo / one shot / wallbang
+
 - [ ] **More Features Coming Soon** : Stay tuned for additional features that will be added in future updates.
 
 
@@ -22,7 +24,8 @@
 # 🖼️ Screenshots
 ### Below are some screenshots demonstrating the cheat's functionality
 
-General : ![image](https://github.com/user-attachments/assets/e3aca285-f1d2-45b9-8f41-84e5bdfd5744)
+General : ![image](https://github.com/user-attachments/assets/ec92124a-7931-4e23-8bb8-e6c1d75d0284)
+
 
 
 AimBot : ![image](https://github.com/user-attachments/assets/b5e99d05-5013-49a3-9269-4164580323ee)
