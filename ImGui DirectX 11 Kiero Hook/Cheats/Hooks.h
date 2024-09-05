@@ -77,3 +77,16 @@ void __stdcall PlayerDestroy_hook(void* self) {
 	PlayerDestroy_o(self);
 
 }
+
+
+
+void(__fastcall* Function_o)(void* self);
+void __stdcall Function_hook(void* self) {
+
+	std::cout << "gun created";
+	Function_o(self);
+
+}
+
+
+

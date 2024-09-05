@@ -6,6 +6,7 @@
 #include "Cheats/AimBot.h"
 #include "Cheats/ESP.h"
 #include "Cheats/Fov.h"
+#include "Cheats/Gun Hack.h"
 
 
 
@@ -24,6 +25,7 @@ void HookFunction() {
         std::cout << "failed hook a function";
     }
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart));
+    
 
     if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy), &PlayerDestroy_hook, (LPVOID*)&PlayerDestroy_o) != MH_OK) {
         std::cout << "failed hook a function";
@@ -31,12 +33,19 @@ void HookFunction() {
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy));
 
 
-
-
     if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::ThrowFunction), &Throw_hook, (LPVOID*)&Throw_o) != MH_OK) {
         std::cout << "failed hook a function";
     }
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::ThrowFunction));
+
+
+    if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::FunctionHook), &Function_hook, (LPVOID*)&Function_o) != MH_OK) {
+        std::cout << "failed hook a function";
+    }
+    MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::FunctionHook));
+
+
+
 
 
 
@@ -63,6 +72,7 @@ void CheatMain() {
     {
         AimBot();
     }
+
 
 
     Fov();
@@ -177,6 +187,33 @@ void ImguiWindow() {
             ImGui::SliderInt("Nade multiply", &Menu::NadeMultiply, 0, 200);
             ImGui::SliderInt("Nade Velocity multiply", &Menu::NadeVeloMultiply, 0, 50);
             ImGui::Checkbox("Throw Nade At Every Player", &Menu::Nuke);
+            ImGui::Dummy(buttonSize);
+            ImGui::Text("Fire Hack (STICK ON THE GUN)");
+            if (ImGui::Button("One Shot Gun"))
+            {
+                OneShot();
+            } 
+            if (ImGui::Button("All WallBang Gun"))
+            {
+                WallBang();
+            }
+            if (ImGui::Button("Fire Rate Hack Gun"))
+            {
+                FireRate();
+            }
+            if (ImGui::Button("No Recoil"))
+            {
+                Recoil();
+            }
+            if (ImGui::Button("No Inaccurate"))
+            {
+                NoInaccuracy();
+            }
+
+            if (ImGui::Button("Infinite Ammo"))
+            {
+                infiniteAmmo();
+            }
         }
         else if (Menu::actualMenu == "AimBot")
         {

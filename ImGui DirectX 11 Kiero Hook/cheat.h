@@ -24,7 +24,15 @@ namespace Offsets {
     constexpr uintptr_t GetShaderOffset = 0x2136280;
     constexpr uintptr_t CameraOffset = 0x2f0;
     constexpr uintptr_t ThrowFunction = 0x5c42c0;
-
+    constexpr uintptr_t FunctionHook = 0;
+    constexpr uintptr_t CurrentGunOffset = 0x90;
+    constexpr uintptr_t GunDef = 0x20;
+    constexpr uintptr_t bodyDamage = 0x68;
+    constexpr uintptr_t GunPenetration = 0xb8;
+    constexpr uintptr_t GunFireRate = 0xec;
+    constexpr uintptr_t RecoilTime = 0x2c0;
+    constexpr uintptr_t MaxInaccurate = 0x320;
+    constexpr uintptr_t currentAmmo = 0x28;
 }
 
 extern uintptr_t GameAssembly;
