@@ -14,7 +14,7 @@
       
 - [x] **Nade Hack** : Throw multiple nade at same time / Increase the throw velocity / Nuke all player
 
-- [x] **Gun Hack** : No Recoil / No Inaccuracy / FireRate Hack / infinite ammo / one shot / wallbang
+- [x] **Gun Hack** : No Recoil / No Inaccuracy / FireRate Hack / infinite ammo / one shot / wallbang (STICKY HACKS , NEED TO RESTART FOR CLEAR)
 
 - [ ] **More Features Coming Soon** : Stay tuned for additional features that will be added in future updates.
 
