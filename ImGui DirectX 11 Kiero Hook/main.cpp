@@ -1,5 +1,6 @@
 #include "includes.h"
 #include "Utils/Variable.h"
+
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 Present oPresent;
@@ -8,11 +9,7 @@ WNDPROC oWndProc;
 ID3D11Device* pDevice = NULL;
 ID3D11DeviceContext* pContext = NULL;
 ID3D11RenderTargetView* mainRenderTargetView;
-
-
-
-
-
+bool init = false;
 void InitImGui()
 {
 	ImGui::CreateContext();
@@ -20,12 +17,9 @@ void InitImGui()
 	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(pDevice, pContext);
-
 	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(800, 600), ImGuiCond_FirstUseEver);
-
 	ImGuiStyle& style = ImGui::GetStyle();
-
 	style.Colors[ImGuiCol_WindowBg] = ImVec4(0.1f, 0.1f, 0.1f, 0.95f);
 	style.Colors[ImGuiCol_TitleBg] = ImVec4(0.1f, 0.1f, 0.1f, 1.0f); 
 	style.Colors[ImGuiCol_TitleBgActive] = ImVec4(0.1f, 0.1f, 0.1f, 1.0f); 
@@ -54,18 +48,14 @@ void InitImGui()
 	style.ChildBorderSize = 0.0f;  
 	style.PopupBorderSize = 0.0f;
 	style.ButtonTextAlign = ImVec2(0.5f, 0.5f);
-
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-
 	if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
 		return true;
-
 	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
-bool init = false;
 HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
 	if (!init)
@@ -87,46 +77,29 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			InitImGui();
 			init = true;
 		}
-
 		else
 			return oPresent(pSwapChain, SyncInterval, Flags);
 	}
-
-
-
 	AllocConsole();
 	FILE* file;
 	freopen_s(&file, "CONOUT$", "w", stdout);
 	freopen_s(&file, "CONIN$", "r", stdin);
 	freopen_s(&file, "CONOUT$", "w", stderr);
-
-
-
-
-
-
-
+	
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-
 	ImguiWindow();
-
-
-
 	ImGui::Render();
-
-	
 	pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	CheatMain();
-	return oPresent(pSwapChain, SyncInterval, Flags);
 	
+	return oPresent(pSwapChain, SyncInterval, Flags);	
 }
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
-{
-	
+{	
 	if (MH_Initialize() != MH_OK) {
 		return 0;
 	}
