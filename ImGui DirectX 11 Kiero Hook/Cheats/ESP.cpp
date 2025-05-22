@@ -7,19 +7,14 @@
 #include <algorithm>
 #include <iostream> 
 
-
-
 void DrawESP() {
     uintptr_t array_address = NULL;
     int array_length = 0;
 
     for (void* playerVoid : Variable::Players) {
-
-
         uintptr_t player = (uintptr_t)playerVoid;
         void* movementManag = *reinterpret_cast<void**>((uintptr_t)(player)+Offsets::playermovement_offset);
         Vector3 Position = *reinterpret_cast<Vector3*>((uintptr_t)(movementManag)+Offsets::movementOffset);
-
         Vector3 corners[] = {
             WorldToScreenPoint(Variable::LocalCamera, Vector3(Position.x - 0.5, Position.y, Position.z - 0.5)),
             WorldToScreenPoint(Variable::LocalCamera, Vector3(Position.x + 0.5, Position.y, Position.z - 0.5)),
@@ -39,8 +34,6 @@ void DrawESP() {
 
             ImGui::GetForegroundDrawList()->AddRect(ImVec2(minX, minY), ImVec2(maxX, maxY), ImColor(Menu::ESPColor[0], Menu::ESPColor[1], Menu::ESPColor[2], 1.0f));
         }
-
-
     }
 }
 
