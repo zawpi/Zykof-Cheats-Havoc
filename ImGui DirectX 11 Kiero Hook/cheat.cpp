@@ -8,17 +8,9 @@
 #include "Cheats/Fov.h"
 #include "Cheats/Gun Hack.h"
 
-
-
-
 uintptr_t base = (uintptr_t)GetModuleHandle(NULL);
 uintptr_t GameAssembly = (uintptr_t)GetModuleHandle("GameAssembly.dll");
-
-
-
-
-
-
+static bool initialized = false;
 
 void HookFunction() {
     if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart), &PlayerStart_hook, (LPVOID*)&PlayerStart_o) != MH_OK) {
@@ -26,69 +18,45 @@ void HookFunction() {
     }
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerSart));
     
-
     if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy), &PlayerDestroy_hook, (LPVOID*)&PlayerDestroy_o) != MH_OK) {
         std::cout << "failed hook a function";
     }
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::playerdestroy));
-
-
+    
     if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::ThrowFunction), &Throw_hook, (LPVOID*)&Throw_o) != MH_OK) {
         std::cout << "failed hook a function";
     }
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::ThrowFunction));
 
-
     if (MH_CreateHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::FunctionHook), &Function_hook, (LPVOID*)&Function_o) != MH_OK) {
         std::cout << "failed hook a function";
     }
     MH_EnableHook(reinterpret_cast<LPVOID*>(GameAssembly + Offsets::FunctionHook));
-
-
-
-
-
-
 }
 
-
-
-
 void CheatMain() {
-
     if (GetAsyncKeyState(VK_DELETE) & 1) {
         Menu::showMenu = !Menu::showMenu;
         Sleep(50);
     }
-
 
     if (Variable::LocalPlayer == NULL)
     {
         return;
     }
 
-
     if (Menu::AimBotEnable)
     {
         AimBot();
     }
 
-
-
     Fov();
-
-
-
-
 }
-
 
 bool GradientButton(const char* label, const ImVec2& size, const ImVec4& color1, const ImVec4& color2)
 {
     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 5.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
-
-
     bool clicked = ImGui::InvisibleButton(label, size);
     ImVec2 p = ImGui::GetItemRectMin();
     ImVec2 p_max = ImGui::GetItemRectMax();
@@ -108,13 +76,6 @@ bool GradientButton(const char* label, const ImVec2& size, const ImVec4& color1,
     return clicked;
 }
 
-
-
-
-
-
-static bool initialized = false;
-
 void ImguiWindow() {
     if (Menu::AimBotEnable && Menu::AimBotDraw)
     {
@@ -128,7 +89,6 @@ void ImguiWindow() {
 
     }
 
-
     if (Menu::showMenu) {
 
         if (!initialized) {
@@ -136,28 +96,22 @@ void ImguiWindow() {
             initialized = true;
             Menu::actualMenu = "General";
         }
-
         ImGui::Begin("Zykof Cheats", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
-
-
         ImGuiStyle& style = ImGui::GetStyle();
         ImVec2 buttonSize(200, 50);
         ImVec2 LittlebuttonSize(100, 40);
-
-
         float buttonSpacing = 5.0f;
         float menuWidth = 200.0f;
         float spacing = 40.0f;
-
-
+        
         ImGui::BeginChild("Menu", ImVec2(menuWidth, 0), true);
-
+        
         if (GradientButton("General", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "General";
         }
-
+        
         ImGui::Dummy(ImVec2(0, buttonSpacing));
-
+        
         if (GradientButton("AimBot", buttonSize, ImVec4(0.2f, 0.2f, 0.2f, 1.0f), ImVec4(0.3f, 0.3f, 0.3f, 1.0f))) {
             Menu::actualMenu = "AimBot";
         }
@@ -169,8 +123,6 @@ void ImguiWindow() {
         }
 
         ImGui::EndChild();
-
-
         ImGui::SameLine();
         ImGui::BeginChild("MainContent", ImVec2(0, 0), true);
 
@@ -224,7 +176,6 @@ void ImguiWindow() {
             ImGui::Checkbox("Draw AimBot FOV", &Menu::AimBotDraw);
             ImGui::ColorEdit3("Color", Menu::AimBotColor);
             ImGui::Dummy(buttonSize);
-
             ImGui::SliderFloat("Fov AimBot", &Menu::FovAimBot, 10, 1000);
             ImGui::SliderFloat("Smoothing", &Menu::AimBotSmooth, 0, 10);
         }
@@ -235,12 +186,8 @@ void ImguiWindow() {
             ImGui::Checkbox("ESP", &Menu::ESPenabled);
             ImGui::ColorEdit3("Color", Menu::ESPColor);
         }
-
         ImGui::EndChild();
-
         ImGui::End();
-
-
         style.FramePadding = ImVec2(4, 4);
         style.ItemSpacing = ImVec2(8, 4);
     }
