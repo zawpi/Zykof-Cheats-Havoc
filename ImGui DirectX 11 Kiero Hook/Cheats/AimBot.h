@@ -21,7 +21,6 @@ void AimBot() {
         void* transform_address;
 
         for (void* playerVoid : Variable::Players) {
-
             uintptr_t player = (uintptr_t)playerVoid;
             void* playerlimbsystem = *reinterpret_cast<void**>(player + Offsets::LimbSystemOffset);
 
@@ -49,10 +48,7 @@ void AimBot() {
             }
 
             playerpos = GetBonePos(transform_address);
-
             Vector3 screenPosition = WorldToScreenPoint(Variable::LocalCamera, playerpos);
-
-
 
             if (screenPosition.z <= 0.0f) {
 
@@ -61,23 +57,16 @@ void AimBot() {
 
             float dist = CalculateDistance(Vector2(screenPosition.x, screenPosition.y), { static_cast<float>(1920 / 2), static_cast<float>(1080 / 2) });
 
-
-
             if (dist < Menu::FovAimBot && dist < minDist) {
                 minDist = dist;
                 AimTarget = screenPosition;
                 playertargetpos = playerpos;
-
-
-
             }
         }
-
+        
         distance3d = Calculate3DDistance(Variable::LocalPlayerPosition, playertargetpos);
-
-
-
         void* aimbot_weaponmanager = *reinterpret_cast<void**>((uintptr_t)Variable::LocalPlayer + Offsets::aimbot_weaponmanager_offset);
+       
         if ((AimTarget.x != 0.0f && AimTarget.y != 0.0f) && (1 != *(int*)((uintptr_t)Variable::LocalPlayer + 0x428)) && (1 == *(int*)((uintptr_t)aimbot_weaponmanager + 0x150))) {
             Vector2 currentMousePos = GetMousePosition();
             Vector2 aimPos(AimTarget.x, AimTarget.y);
@@ -85,12 +74,8 @@ void AimBot() {
             float smooth = Menu::AimBotSmooth;
             offset.x /= smooth;
             offset.y /= smooth;
-
-
-
             MoveMouseBy(Vector2(offset.x, -offset.y));
         }
-
     }
 }
 
